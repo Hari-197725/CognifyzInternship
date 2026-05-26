@@ -5,32 +5,48 @@ import java.util.Scanner;
 
 public class TemperatureConverter {
 
+	public double celsiusToFahrenheit(double temperature) {
+		return (9.0 / 5.0) * temperature + 32;
+	}
+
+	public double fahrenheitToCelsius(double temperature) {
+		return (5.0 / 9.0) * (temperature - 32);
+	}
+
 	public static void main(String[] args) {
+		TemperatureConverter converter = new TemperatureConverter();
 		Scanner scan = new Scanner(System.in);
 
-		try {
-			System.out.println("Enter your temperature: ");
-			double temperature = scan.nextInt();
+		while (true) {
+			try {
 
-			System.out.println("Select which conversion you want\n1. Celsius -> Fahrenheit\n2. Fahrenheit -> Celsius");
-			int choice = scan.nextInt();
+				System.out.println("Select which conversion you want\n1. Celsius -> Fahrenheit\n2. Fahrenheit -> Celsius\n3. Exit Converter");
+				int option = scan.nextInt();
 
-			switch (choice) {
-			case 1:
-				double fahrenheit = (9.0 / 5.0) * temperature + 32;
-				System.out.printf("Temperature in Fahrenheit: %.1f%n ", fahrenheit);
-				break;
+				if (option == 3) {
+					System.out.println("Bye! See you again");
+					break;
+				}
 
-			case 2:
-				double celsius = (5.0 / 9.0) * (temperature - 32);
-				System.out.printf("Temperature in Celsius: %.1f%n", celsius);
-				break;
+				System.out.println("Enter your Temperature");
+				double temperature = scan.nextDouble();
 
-			default:
-				System.out.println("Invalid choice! Please select 1 or 2.");
+				switch (option) {
+				case 1:
+					System.out.printf("Temperature in Fahrenheit: %.1f%n", converter.celsiusToFahrenheit(temperature));
+					break;
+
+				case 2:
+					System.out.printf("Temperature in Celsius: %.1f%n", converter.fahrenheitToCelsius(temperature));
+					break;
+
+				default:
+					System.out.println("Invalid choice! Please select 1, 2 or 3.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("Error: Invalid input! Please enter a valid number.");
+				scan.nextLine();
 			}
-		} catch (InputMismatchException e) {
-			System.out.println("Invalid input! please select correct option");
 		}
 
 		scan.close();

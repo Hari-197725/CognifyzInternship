@@ -28,7 +28,7 @@ public class TaskManagementSystem implements TaskManagement {
 
 	public CreateTask findTaskById(String id) {
 		for (CreateTask task : taskList) {
-			if (id == task.getId()) {
+			if (id.equals(task.getId())) {
 				return task;
 			}
 		}
@@ -51,12 +51,12 @@ public class TaskManagementSystem implements TaskManagement {
 
 	public void delete(String id) {
 		CreateTask taskToDelete = findTaskById(id);
-		
+
 		if (taskToDelete == null) {
 			System.out.println("Task wiht ID " + id + " not found!");
 			return;
 		}
-		
+
 		taskList.remove(taskToDelete);
 		System.out.println("Task deleted successfully!");
 	}
@@ -110,7 +110,7 @@ public class TaskManagementSystem implements TaskManagement {
 					CreateTask taskToUpdate = taskManagementSystem.findTaskById(taskId);
 
 					if (taskToUpdate == null) {
-						System.out.println("Task wiht ID " + taskId + " not found!");
+						System.out.println("Task with ID " + taskId + " not found!");
 						break;
 					}
 
@@ -144,13 +144,13 @@ public class TaskManagementSystem implements TaskManagement {
 			}
 
 			case 5: {
-				System.out.println("Bey! See you again");
+				System.out.println("Bye! See you again");
 				System.exit(0);
 				break;
 			}
 
 			default:
-				System.out.println("Invalid choice! Please enter 1-7");
+				System.out.println("Invalid choice! Please enter 1-5");
 
 				scan.close();
 			}

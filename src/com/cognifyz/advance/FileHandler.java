@@ -1,6 +1,7 @@
 package com.cognifyz.advance;
 
 import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -51,7 +52,7 @@ public class FileHandler {
 			bw.newLine();
 			System.out.println("Data update Successfully");
 		} catch (Exception e) {
-			System.out.println("Erro: " + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
 		}
 	}
 

@@ -1,13 +1,9 @@
 package com.cognifyz.beginner;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-
-	public static Map<String, String> map = new LinkedHashMap<>();
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
@@ -29,21 +25,21 @@ public class Game {
 					quizGamePoints++;
 					System.out.println("Correct answer!");
 				} else {
-					System.out.println("Your answer is wrong the correct answer is: " + map.get(que));
+					System.out.println("Your answer is wrong the correct answer is: " + que.getAnswer());
 				}
 			}
 
 			if (quizGamePoints >= 6) {
-				System.out.println("You are WIN: " + quizGamePoints + "/10");
+				System.out.println("Congratulations! You WIN: " + quizGamePoints + "/10");
 			} else {
-				System.out.println("You are LOSS: " + quizGamePoints + "/10");
+				System.out.println("You LOSS: " + quizGamePoints + "/10");
 			}
 
 			break;
 
 		case 2:
 			Random random = new Random();
-			int secretNum = random.nextInt(10) + 1;
+			int secretNum = random.nextInt(100) + 1;
 			int attempt = 3;
 
 			System.out.println("Guess the number \"1-100\" ");
@@ -75,6 +71,7 @@ public class Game {
 
 				} else {
 					System.out.println("Excellent! You found the correct number.");
+					break;
 				}
 
 				attempt--;

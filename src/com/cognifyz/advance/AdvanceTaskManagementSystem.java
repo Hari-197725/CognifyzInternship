@@ -1,6 +1,7 @@
 package com.cognifyz.advance;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -188,7 +189,7 @@ public class AdvanceTaskManagementSystem implements TaskManagement {
 			}
 
 			case 5: {
-				System.out.println("Bey! See you again");
+				System.out.println("Bye! See you again");
 				System.exit(0);
 				break;
 			}

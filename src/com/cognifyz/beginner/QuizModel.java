@@ -1,6 +1,7 @@
 package com.cognifyz.beginner;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class QuizModel {
@@ -26,8 +27,8 @@ public class QuizModel {
 	public static List<QuizModel> getMockData() {
 
 		List<QuizModel> questions = new ArrayList<QuizModel>();
-		QuizModel que1 = new QuizModel(); // 1000
-		que1.setAnswer("New Delhi");
+		QuizModel que1 = new QuizModel();
+		que1.setAnswer("new delhi");
 		que1.setQuestion("What is the capital of India?");
 		questions.add(que1);
 
@@ -73,7 +74,7 @@ public class QuizModel {
 
 		QuizModel que10 = new QuizModel();
 		que10.setQuestion("Which gas do plants takes in for photosynthesis ?");
-		que10.setQuestion("carbon dioxide");
+		que10.setAnswer("carbon dioxide");
 		questions.add(que10);
 
 		return questions;
