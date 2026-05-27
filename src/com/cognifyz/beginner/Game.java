@@ -3,6 +3,8 @@ package com.cognifyz.beginner;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.cognifyz.model.QuizModel;
+
 public class Game {
 
 	public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package com.cognifyz.intermediate;
 
+import com.cognifyz.model.CreateTask;
+
 public interface TaskManagement {
 
 	public void createTask(String title, String description, String dueDate);

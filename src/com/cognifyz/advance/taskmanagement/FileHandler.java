@@ -1,4 +1,4 @@
-package com.cognifyz.advance;
+package com.cognifyz.advance.taskmanagement;
 
 import java.io.BufferedReader;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.cognifyz.intermediate.CreateTask;
+import com.cognifyz.model.CreateTask;
 
 public class FileHandler {
 

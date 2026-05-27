@@ -1,4 +1,4 @@
-package com.cognifyz.advance;
+package com.cognifyz.advance.taskmanagement;
 
 import java.util.ArrayList;
 
@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.cognifyz.intermediate.CreateTask;
 import com.cognifyz.intermediate.TaskManagement;
 import com.cognifyz.intermediate.TaskStatus;
+import com.cognifyz.model.CreateTask;
 
 public class AdvanceTaskManagementSystem implements TaskManagement {
 

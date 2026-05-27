@@ -1,4 +1,4 @@
-package com.cognifyz.beginner;
+package com.cognifyz.model;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,8 @@
-package com.cognifyz.intermediate;
+package com.cognifyz.model;
 
 import java.util.UUID;
 
+import com.cognifyz.intermediate.TaskStatus;
 import com.cognifyz.util.JsonManager;
 
 public class CreateTask {

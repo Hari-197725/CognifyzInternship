@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.cognifyz.model.CreateTask;
+
 public class TaskManagementSystem implements TaskManagement {
 
 	public static List<CreateTask> taskList = new ArrayList<>();
