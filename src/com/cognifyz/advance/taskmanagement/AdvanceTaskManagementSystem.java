@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.cognifyz.intermediate.TaskManagement;
-import com.cognifyz.intermediate.TaskStatus;
+import com.cognifyz.enums.TaskStatus;
 import com.cognifyz.model.CreateTask;
+import com.cognifyz.service.TaskManagement;
+import com.cognifyz.util.FileHandler;
 
 public class AdvanceTaskManagementSystem implements TaskManagement {
 
@@ -21,7 +22,7 @@ public class AdvanceTaskManagementSystem implements TaskManagement {
 	@Override
 	public void createTask(String title, String description, String dueDate) {
 		TaskStatus taskStatus = TaskStatus.fromCode(0);
-		CreateTask task = new CreateTask(title, description, taskStatus, dueDate);
+		CreateTask task = new CreateTask(title, description, taskStatus, CreateTask.parseDueDate(dueDate));
 		FileHandler.update(FILE_PATH, task.toJson());
 	}
 
@@ -54,7 +55,7 @@ public class AdvanceTaskManagementSystem implements TaskManagement {
 		taskToUpdate.setStatus(status);
 
 		if (!dueDate.trim().isEmpty()) {
-			taskToUpdate.setDuedate(dueDate);
+			taskToUpdate.setDuedate(CreateTask.parseDueDate(dueDate));
 		}
 
 		List<CreateTask> tasks = FileHandler.read(FILE_PATH);

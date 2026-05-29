@@ -1,7 +1,6 @@
-package com.cognifyz.intermediate;
+package com.cognifyz.enums;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 public enum TaskStatus {

@@ -1,17 +1,20 @@
 package com.cognifyz.intermediate;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Scanner;
 
+import com.cognifyz.enums.TaskStatus;
 import com.cognifyz.model.CreateTask;
+import com.cognifyz.service.TaskManagement;
 
 public class TaskManagementSystem implements TaskManagement {
 
 	public static List<CreateTask> taskList = new ArrayList<>();
 
-	public void createTask(String title, String description, String dueDate) {
+	public void createTask(String title, String description, LocalDate dueDate) {
 		TaskStatus taskStatus = TaskStatus.fromCode(0);
 		CreateTask tasks = new CreateTask(title, description, taskStatus, dueDate);
 		taskList.add(tasks);
@@ -38,7 +41,11 @@ public class TaskManagementSystem implements TaskManagement {
 		return null;
 	}
 
-	public void updateTask(CreateTask taskToUpdate, String description, int statusAsInt, String dueDate) {
+	public void updateTask(CreateTask taskToUpdate, String description, int statusAsInt, LocalDate dueDate) {
+		if (taskList.isEmpty()) {
+			System.out.println("No tasks are available!");
+		}
+
 		if (!description.trim().isEmpty()) {
 			taskToUpdate.setDescription(description);
 		}
@@ -46,12 +53,14 @@ public class TaskManagementSystem implements TaskManagement {
 		TaskStatus status = TaskStatus.fromCode(statusAsInt);
 		taskToUpdate.setStatus(status);
 
-		if (!dueDate.trim().isEmpty()) {
-			taskToUpdate.setDuedate(dueDate);
-		}
+		taskToUpdate.setDuedate(dueDate);
 	}
 
 	public void delete(String id) {
+		if (taskList.isEmpty()) {
+			System.out.println("No tasks are available!");
+		}
+
 		CreateTask taskToDelete = findTaskById(id);
 
 		if (taskToDelete == null) {
@@ -90,58 +99,71 @@ public class TaskManagementSystem implements TaskManagement {
 				System.out.println("Enter task's Due Date: ");
 				String duedate = scan.nextLine();
 
-				taskManagementSystem.createTask(title, description, duedate);
+				taskManagementSystem.createTask(title, description, CreateTask.parseDueDate(duedate));
 				System.out.println("Task created successfully");
+				System.out.println("--------------------------------------");
 
 				break;
 			}
 
 			case 2: {
 				taskManagementSystem.displayTasks();
+				System.out.println("--------------------------------------");
 				break;
 			}
 
 			case 3: {
-				while (true) {
-					System.out.println("These are all the current tasks: ");
-					taskManagementSystem.displayTasks();
+				if (taskList.isEmpty()) {
+					System.out.println("No tasks are available!");
+					continue;
+				}
 
-					System.out.println("Enter Task ID to update: ");
-					String taskId = scan.nextLine();
+				System.out.println("These are the current tasks: ");
+				taskManagementSystem.displayTasks();
 
-					CreateTask taskToUpdate = taskManagementSystem.findTaskById(taskId);
+				System.out.println("Enter Task ID to update: ");
+				String taskId = scan.nextLine();
 
-					if (taskToUpdate == null) {
-						System.out.println("Task with ID " + taskId + " not found!");
-						break;
-					}
+				CreateTask taskToUpdate = taskManagementSystem.findTaskById(taskId);
 
-					System.out.println("Note to update:Use enter to separate fields \n(eg:- Description\nStatus\nDue Date)");
-					String description = scan.nextLine();
-
-					System.out.println("Enter your new Status:");
-					for (TaskStatus ele : TaskStatus.getUpdateTaskStatus()) {
-						System.out.println(ele.getCode() + "-" + ele.getName());
-					}
-					int statusAsInt = scan.nextInt();
-
-					scan.nextLine();
-					System.out.println("Enter Due Date to Update");
-					String dueDate = scan.nextLine();
-
-					taskManagementSystem.updateTask(taskToUpdate, description, statusAsInt, dueDate);
-
+				if (taskToUpdate == null) {
+					System.out.println("Task with ID " + taskId + " not found!");
 					break;
 				}
+
+				System.out.println("Note to update:Use enter to separate fields eg:- \nDescription\nStatus\nDue Date");
+				String description = scan.nextLine();
+
+				System.out.println("Enter your new Status:");
+				for (TaskStatus ele : TaskStatus.getUpdateTaskStatus()) {
+					System.out.println(ele.getCode() + "-" + ele.getName());
+				}
+				int statusAsInt = scan.nextInt();
+
+				scan.nextLine();
+				System.out.println("Enter Due Date to Update");
+				String dueDate = scan.nextLine();
+
+				taskManagementSystem.updateTask(taskToUpdate, description, statusAsInt, CreateTask.parseDueDate(dueDate));
+				System.out.println("--------------------------------------");
+
+				break;
 			}
 
 			case 4: {
+				if (taskList.isEmpty()) {
+					System.out.println("No tasks are available!");
+					continue;
+				}
+
 				System.out.println("These are all the current tasks: ");
 				taskManagementSystem.displayTasks();
 
 				System.out.println("Enter Task ID to delete: ");
 				String taskId = scan.nextLine();
 				taskManagementSystem.delete(taskId);
+				System.out.println("--------------------------------------");
+
 				break;
 			}
 
