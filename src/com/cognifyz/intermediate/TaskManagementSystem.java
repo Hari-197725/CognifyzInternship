@@ -1,8 +1,9 @@
 package com.cognifyz.intermediate;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -72,111 +73,129 @@ public class TaskManagementSystem implements TaskManagement {
 		System.out.println("Task deleted successfully!");
 	}
 
+	public void separator() {
+		System.out.println("--------------------------------------");
+	}
+
 	public static void main(String[] args) {
 		TaskManagementSystem taskManagementSystem = new TaskManagementSystem();
 		Scanner scan = new Scanner(System.in);
 
 		while (true) {
-			System.out.println("Choose what you want to do: ");
-			System.out.println("1. Create a New Task\n2. View All Tasks\n3. Update Task\n4. Delete Task\n5. Exit Task Mangement System");
-			int choice = scan.nextInt();
+			try {
 
-			scan.nextLine();
+				System.out.println("Choose what you want to do: ");
+				System.out.println("1. Create a New Task\n2. View All Tasks\n3. Update Task\n4. Delete Task\n5. Exit Task Mangement System");
+				int choice = scan.nextInt();
 
-			if (choice < 1 || choice > 5) {
-				System.out.println("You have selected out of range choice. Please choose from 1 to 5:");
-				continue;
-			}
+				scan.nextLine();
 
-			switch (choice) {
-			case 1: {
-				System.out.println("Enter task's title: ");
-				String title = scan.nextLine();
-
-				System.out.println("Enter task's Description: ");
-				String description = scan.nextLine();
-
-				System.out.println("Enter task's Due Date: ");
-				String duedate = scan.nextLine();
-
-				taskManagementSystem.createTask(title, description, CreateTask.parseDueDate(duedate));
-				System.out.println("Task created successfully");
-				System.out.println("--------------------------------------");
-
-				break;
-			}
-
-			case 2: {
-				taskManagementSystem.displayTasks();
-				System.out.println("--------------------------------------");
-				break;
-			}
-
-			case 3: {
-				if (taskList.isEmpty()) {
-					System.out.println("No tasks are available!");
+				if (choice < 1 || choice > 5) {
+					System.out.println("You have selected out of range choice. Please choose from 1 to 5:");
 					continue;
 				}
 
-				System.out.println("These are the current tasks: ");
-				taskManagementSystem.displayTasks();
+				switch (choice) {
+				case 1: {
+					try {
 
-				System.out.println("Enter Task ID to update: ");
-				String taskId = scan.nextLine();
+						System.out.println("Enter task's title: ");
+						String title = scan.nextLine();
 
-				CreateTask taskToUpdate = taskManagementSystem.findTaskById(taskId);
+						System.out.println("Enter task's Description: ");
+						String description = scan.nextLine();
 
-				if (taskToUpdate == null) {
-					System.out.println("Task with ID " + taskId + " not found!");
+						System.out.println("Enter task's Due Date: ");
+						String duedate = scan.nextLine();
+						LocalDate dueDate = CreateTask.parseDueDate(duedate);
+
+						taskManagementSystem.createTask(title, description, dueDate);
+						System.out.println("Task created successfully");
+
+						taskManagementSystem.separator();
+
+					} catch (IllegalArgumentException e) {
+						System.out.println(e.getMessage());
+					}
 					break;
 				}
 
-				System.out.println("Note to update:Use enter to separate fields eg:- \nDescription\nStatus\nDue Date");
-				String description = scan.nextLine();
-
-				System.out.println("Enter your new Status:");
-				for (TaskStatus ele : TaskStatus.getUpdateTaskStatus()) {
-					System.out.println(ele.getCode() + "-" + ele.getName());
+				case 2: {
+					taskManagementSystem.displayTasks();
+					taskManagementSystem.separator();
+					break;
 				}
-				int statusAsInt = scan.nextInt();
 
+				case 3: {
+					if (taskList.isEmpty()) {
+						System.out.println("No tasks are available!");
+						taskManagementSystem.separator();
+						continue;
+					}
+
+					System.out.println("These are the current tasks: ");
+					taskManagementSystem.displayTasks();
+
+					System.out.println("Enter Task ID to update: ");
+					String taskId = scan.nextLine();
+
+					CreateTask taskToUpdate = taskManagementSystem.findTaskById(taskId);
+
+					if (taskToUpdate == null) {
+						System.out.println("Task with ID " + taskId + " not found!");
+						break;
+					}
+
+					System.out.println("Note to update:Use enter to separate fields eg:- \nDescription\nStatus\nDue Date");
+					String description = scan.nextLine();
+
+					System.out.println("Enter your new Status:");
+					for (TaskStatus ele : TaskStatus.getUpdateTaskStatus()) {
+						System.out.println(ele.getCode() + "-" + ele.getName());
+					}
+					int statusAsInt = scan.nextInt();
+
+					scan.nextLine();
+					System.out.println("Enter Due Date to Update");
+					String dueDate = scan.nextLine();
+
+					taskManagementSystem.updateTask(taskToUpdate, description, statusAsInt, CreateTask.parseDueDate(dueDate));
+					taskManagementSystem.separator();
+
+					break;
+				}
+
+				case 4: {
+					if (taskList.isEmpty()) {
+						System.out.println("No tasks are available!");
+						taskManagementSystem.separator();
+						continue;
+					}
+
+					System.out.println("These are all the current tasks: ");
+					taskManagementSystem.displayTasks();
+
+					System.out.println("Enter Task ID to delete: ");
+					String taskId = scan.nextLine();
+					taskManagementSystem.delete(taskId);
+					taskManagementSystem.separator();
+
+					break;
+				}
+
+				case 5: {
+					System.out.println("Bye! See you again");
+					System.exit(0);
+					break;
+				}
+
+				default:
+					System.out.println("Invalid choice! Please enter 1-5");
+					scan.close();
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("Error: Invalid input! Please enter a valid number.");
 				scan.nextLine();
-				System.out.println("Enter Due Date to Update");
-				String dueDate = scan.nextLine();
-
-				taskManagementSystem.updateTask(taskToUpdate, description, statusAsInt, CreateTask.parseDueDate(dueDate));
-				System.out.println("--------------------------------------");
-
-				break;
-			}
-
-			case 4: {
-				if (taskList.isEmpty()) {
-					System.out.println("No tasks are available!");
-					continue;
-				}
-
-				System.out.println("These are all the current tasks: ");
-				taskManagementSystem.displayTasks();
-
-				System.out.println("Enter Task ID to delete: ");
-				String taskId = scan.nextLine();
-				taskManagementSystem.delete(taskId);
-				System.out.println("--------------------------------------");
-
-				break;
-			}
-
-			case 5: {
-				System.out.println("Bye! See you again");
-				System.exit(0);
-				break;
-			}
-
-			default:
-				System.out.println("Invalid choice! Please enter 1-5");
-
-				scan.close();
 			}
 		}
 	}

@@ -45,6 +45,7 @@ public class CreateTask {
 			if (parsed.isBefore(LocalDate.now())) {
 				throw new IllegalArgumentException("Due date must be today or a future date");
 			}
+
 			return parsed;
 		} catch (DateTimeParseException e) {
 			throw new IllegalArgumentException("Invalid due date. Use dd/MM/yyyy (e.g. 16/07/2027)");
