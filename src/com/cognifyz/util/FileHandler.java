@@ -2,6 +2,7 @@ package com.cognifyz.util;
 
 import java.io.BufferedReader;
 
+
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -45,17 +46,6 @@ public class FileHandler {
 			return Collections.emptyList();
 		}
 	}
-
-//	public static boolean isFileEmpty(String filePath) {
-//		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-//
-//			while (br.readLine() != null) {
-//				return true;
-//			}
-//		} catch (Exception e) {
-//		}
-//		return false;
-//	}
 
 	public static void update(String filePath, String updateData) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {

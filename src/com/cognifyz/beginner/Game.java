@@ -1,6 +1,7 @@
 package com.cognifyz.beginner;
 
 import java.util.Random;
+
 import java.util.Scanner;
 
 import com.cognifyz.model.QuizModel;
@@ -31,10 +32,10 @@ public class Game {
 				}
 			}
 
-			if (quizGamePoints >= 6) {
-				System.out.println("Congratulations! You WIN: " + quizGamePoints + "/10");
+			if (quizGamePoints >= 4) {
+				System.out.println("Congratulations! You WIN: " + quizGamePoints + "/7");
 			} else {
-				System.out.println("You LOSS: " + quizGamePoints + "/10");
+				System.out.println("You LOSS: " + quizGamePoints + "/7");
 			}
 
 			break;

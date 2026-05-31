@@ -53,29 +53,14 @@ public class QuizModel {
 		questions.add(que5);
 
 		QuizModel que6 = new QuizModel();
-		que6.setQuestion("Who invented the telephone ?");
-		que6.setAnswer("alexander graham bell");
+		que6.setQuestion("Which festial is known as the Festival of Lights ?");
+		que6.setAnswer("diwali");
 		questions.add(que6);
 
 		QuizModel que7 = new QuizModel();
-		que7.setQuestion("Which festial is known as the Festival of Lights ?");
-		que7.setAnswer("diwali");
+		que7.setQuestion("Which gas do plants takes in for photosynthesis ?");
+		que7.setAnswer("carbon dioxide");
 		questions.add(que7);
-
-		QuizModel que8 = new QuizModel();
-		que8.setQuestion("Who is known as the missile man of India ?");
-		que8.setAnswer("dr. apj abdul kalam");
-		questions.add(que8);
-
-		QuizModel que9 = new QuizModel();
-		que9.setQuestion("What is the largest desert in world ?");
-		que9.setAnswer("the sahara desert");
-		questions.add(que9);
-
-		QuizModel que10 = new QuizModel();
-		que10.setQuestion("Which gas do plants takes in for photosynthesis ?");
-		que10.setAnswer("carbon dioxide");
-		questions.add(que10);
 
 		return questions;
 	}
